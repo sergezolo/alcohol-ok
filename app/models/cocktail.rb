@@ -1,2 +1,4 @@
 class Cocktail < ApplicationRecord
+   
+
 end
