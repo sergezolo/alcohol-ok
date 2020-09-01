@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :users
+  resources :users do
+    resources :cocktails
+  end
   resources :cocktail_ingredients
   resources :ingredients
   resources :cocktails, only: [:index, :show]

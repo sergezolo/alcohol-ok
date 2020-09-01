@@ -1,7 +1,16 @@
 class CocktailsController < ApplicationController
 
     def index
-        @cocktails = Cocktail.all
+        if params[:user_id]
+            user = User.find_by_id(params[:user_id])
+            if user.nil?
+                redirect_to cocktails_path
+            else
+                @coctails = user.coctails
+            end
+        else
+            @cocktails = Cocktail.all
+        end
     end
 
     def show
