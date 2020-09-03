@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>AlcoholOk</title>
+    <title>AlcoholOK</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,6 +10,17 @@
   </head>
 
   <body>
+      <div>
+        <%= link_to "All Cocktails" %>
+        <% if logged_in? %>
+          <%= link_to "My Cocktails" %>
+          <%= link_to "New Cocktail" %>
+          <%= link_to "Sign Out", signout_path, method:"delete" %>
+        <% else %>
+          <%= link_to "Sign Up", signup_path %>
+          <%= link_to "Sign In", signin_path %>
+        <% end %>
+      </div>
     <%= yield %>
   </body>
 </html>
