@@ -1,5 +1,11 @@
 class CocktailsController < ApplicationController
 
+    before_action :redirect_if_not_logged_in
+
+    def new
+        @cocktail = Cocktail.new
+    end
+
     def index
         if params[:user_id]
             user = User.find_by_id(params[:user_id])

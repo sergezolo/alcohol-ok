@@ -12,11 +12,9 @@ Rails.application.routes.draw do
   delete "/signout" => "sessions#destroy"
 
  
-  resources :users do
-    resources :cocktails
-  end
-  
-  resources :ingredients
-  resources :cocktails, only: [:index, :show]
+  resources :users
+  resources :cocktails
+
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
