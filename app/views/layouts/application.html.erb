@@ -6,6 +6,7 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+
    
   </head>
 
@@ -13,9 +14,16 @@
       <div>
         <%= link_to "All Cocktails" %>
         <% if logged_in? %>
+
+          <div style="float: right;">
+            <%= form_tag("/signout", method:"delete") do %>
+              Welcome, <%=current_user.first_name%> <%= submit_tag "Sign Out" %>
+            <% end %>
+          </div>
+
           <%= link_to "My Cocktails" %>
           <%= link_to "New Cocktail", new_cocktail_path %>
-          <%= link_to "Sign Out", signout_path, method:"delete" %>
+          <% #link_to "Sign Out", signout_path, method: :delete %> 
         <% else %>
           <%= link_to "Sign Up", signup_path %>
           <%= link_to "Sign In", signin_path %>

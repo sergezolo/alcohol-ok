@@ -24,4 +24,5 @@ class SessionsController < ApplicationController
         session.clear
         redirect_to cocktails_path
     end
+    
 end

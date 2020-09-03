@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :steps
   # First Page
   root "sessions#welcome"
   # Younger than 21
