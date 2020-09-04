@@ -7,17 +7,21 @@
     <%= f.label :description %>
     <%= f.text_field :description %>
     <br><br>
-    <%= f.label :ingredients %>
-    <br><br>
-    <%= f.collection_select :ingredient_ids, Ingredient.all, :id, :name, include_blank: true %>
-    <%= f.fields_for :ingredients, @cocktail.ingredients.build do |ingredient| %>
-        <%= ingredient.fields_for :cocktail_ingredients, @cocktail.cocktail_ingredients.build do |item| %>
-                    <%= item.label :quantity %>
-                    <%= item.text_field :quantity %>
-                    <%= item.select :unit, options_for_select(CocktailIngredient::UNITS) %>
-            <% end %>        
-        <br><br>
-    <% end %>
+            <%= f.label :ingredients %>
+            <br><br>
+            <%# f.collection_select :ingredient_ids, Ingredient.all, :id, :name, include_blank: true %>
+            <%# f.fields_for :ingredients, @cocktail.ingredients.build do |ingredient| %>
+                <%= f.fields_for :ingredients, @cocktail.ingredients.build do |ingredient| %>
+                <%= ingredient.label :name %>
+                <%= ingredient.text_field :name %>
+                <%= ingredient.fields_for :cocktail_ingredients, @cocktail.cocktail_ingredients.build do |item| %>
+                            
+                            <%= item.label :quantity %>
+                            <%= item.text_field :quantity %>
+                            <%= item.select :unit, options_for_select(CocktailIngredient::UNITS) %>
+                    <% end %>        
+                <br><br>
+            <% end %>
     <%= f.label :steps %>
     <br><br>
     <%= f.fields_for :steps do |step| %>

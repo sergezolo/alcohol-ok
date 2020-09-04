@@ -28,3 +28,10 @@ Comment
 - belongs_to :cocktail
 * content 
 
+cocktail = {
+    name:
+    description:
+    ingredients: [:ingredient_id, :ingredient_name]
+    cocktail_ingredients: [:ingredient_id, :quantity, :unit]
+    steps: []
+}

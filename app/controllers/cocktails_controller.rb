@@ -38,11 +38,12 @@ class CocktailsController < ApplicationController
         params.require(:cocktail).permit(
             :name,
             :description,
-            ingredient_ids: [],
-            cocktail_ingredient_ids: [],
-            ingredients: [:name],
-            cocktail_ingredients: [:ingredient_id, :quantity, :unit],
-            steps:[]
+            steps_attributes:[],
+            ingredients_attributes: [   :ingredient_id, 
+                                        :name,
+                                        cocktail_ingredients: []
+                                    ]
+            
         )
     end
 
