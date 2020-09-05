@@ -3,16 +3,15 @@ class CocktailsController < ApplicationController
   
     def new
         @cocktail = Cocktail.new
-        5.times do
-            @cocktail.ingredients.build
-            @cocktail.cocktail_ingredients.build
-            @cocktail.steps.build  
-        end
+        @cocktail.steps.build 
+        @cocktail.ingredients.build
+        @cocktail.cocktail_ingredients.build
     end
 
     def create 
-        binding.pry
-        #@cocktail.create(cocktail_params)
+        #binding.pry
+        @cocktail = Cocktail.create(cocktail_params)
+        
     end
 
     def index
@@ -38,10 +37,10 @@ class CocktailsController < ApplicationController
         params.require(:cocktail).permit(
             :name,
             :description,
-            steps_attributes:[],
+            steps_attributes:[:step],
             ingredients_attributes: [   :ingredient_id, 
                                         :name,
-                                        cocktail_ingredients: []
+                                        cocktail_ingredients: [:quantity, :unit]
                                     ]
             
         )
