@@ -1,0 +1,87 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+.topnav {
+  min-height: 30px;
+  background-color: #4e0000;
+  overflow: hidden;
+}
+
+.topnav_sm {
+  min-height: 20px;
+  background-color: #7a0000;
+  overflow: hidden;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size:30px;
+}
+
+.topnav_sm a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 10px 16px;
+  text-decoration: none;
+  font-size:16px;
+}
+.name {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 10px 16px;
+  text-decoration: none;
+  font-size:16px;
+}
+.topnav a:hover {
+  background-color: #4e0000;
+  color:  #f2f2f2;
+}
+
+.topnav_sm a:hover {
+  background-color: #4e0000;
+  color:  #f2f2f2;
+}
+
+.topnav a.active {
+  background-color: #4e0000;
+  color: white;
+}
+
+.button {
+  background-color: #7a0000;
+  border: 2px solid #7a0000;
+  color: #f2f2f2;
+  padding: 8px 8px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.button:hover {
+  background-color: #4e0000;
+  color: white;
+}
+
+.button {
+  float: left;
+}

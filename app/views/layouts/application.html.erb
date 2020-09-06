@@ -11,24 +11,49 @@
   </head>
 
   <body>
-      <div>
-        <%= link_to "All Cocktails" %>
+    <div class="topnav">
+      <%= link_to "alcoholOK", cocktails_path %>
+    </div>
+
+    <div class="topnav_sm">
+      <div style="float: right;">
         <% if logged_in? %>
-
-          <div style="float: right;">
-            <%= form_tag("/signout", method:"delete") do %>
-              Welcome, <%=current_user.first_name%> <%= submit_tag "Sign Out" %>
-            <% end %>
-          </div>
-
-          <%= link_to "My Cocktails" %>
-          <%= link_to "New Cocktail", new_cocktail_path %>
-          <% #link_to "Sign Out", signout_path, method: :delete %> 
+          <%= form_tag("/signout", method:"delete") do %>
+            <div>
+              <div style="float: left;">
+                <div class="name"> Welcome, <%=current_user.first_name%> </div>
+              </div>
+              <div style="float: right;">
+                <%= button_tag "Sign Out", class: "button" %> 
+                <%#link_to "Sign Out", signout_path, method: :delete %>
+              </div> 
+          <% end %>
         <% else %>
-          <%= link_to "Sign Up", signup_path %>
-          <%= link_to "Sign In", signin_path %>
+          <div>
+            <div style="float: left;">
+              <%= form_tag("/signin", method:"get") do %>
+                <%= button_tag "Sign In", class: "button" %>
+              <% end %>
+            </div>
+            <div style="float: right;">
+              <%= form_tag("/signup", method:"get") do %>
+                <%= button_tag "Sign Up", class: "button" %>
+              <% end %>
+            </div>
+          </div>
         <% end %>
       </div>
+    </div>
+
+      
+        <% if logged_in? %>
+          <%= link_to "My Cocktails" %>
+          <%= link_to "New Cocktail", new_cocktail_path %>
+        <% end %>
+
+</div>
+
+
     <%= yield %>
   </body>
 </html>
