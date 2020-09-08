@@ -1,7 +1,8 @@
 <h1><%= @user.first_name %></h1>
 
-<ul>
-  <% @user.cocktails.each do |coctail| %>
-    <li><%=link_to coctail.name, user_cocktail_path(@user, coctail) %></li>
-  <% end %>
-</ul>
+
+<% @user.cocktails.each do |cocktail| %>
+    <ul>
+        <li><%= link_to cocktail.name, cocktail_path(cocktail) %></li>
+    </ul>
+<% end %>

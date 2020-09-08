@@ -4,18 +4,11 @@ class CocktailsController < ApplicationController
     def index
         @cocktails = Cocktail.all
     end
-
-    def home
-        if params[:user_id]
-            @cocktails = User.find(params[:user_id]).cocktails
-        else
-            @cocktails = Cocktail.all
-        end
-    end
       
     def new
         @cocktail = Cocktail.new(user_id: params[:user_id])
-        5.times {@cocktail.cocktail_ingredients.build.build_ingredient}
+        5.times {@cocktail.ingredient_attributes.build}
+        #5.times {@cocktail.cocktail_ingredients.build.build_ingredient}
     end
       
     def create
@@ -67,9 +60,7 @@ class CocktailsController < ApplicationController
             :story,
             :instruction,
             cocktail_ingredients_attributes: [
-                :id,
                 :ingredient_id,
-                :recipe_id,
                 :quantity,
                 :unit,
                 ingredient_attributes: [:id, :name]

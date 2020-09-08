@@ -11,10 +11,8 @@ Rails.application.routes.draw do
   post "/signin" => "sessions#create"
   # Sign Out
   delete "/signout" => "sessions#destroy"
-
-  
-      # All User's Cocktails 
-      get "/mycocktails" => "cocktails#home"
+  # All User's Cocktails 
+  get "/mycocktails" => "users#show"
 
  
   resources :users

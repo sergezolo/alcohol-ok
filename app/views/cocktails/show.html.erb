@@ -3,7 +3,7 @@
 <p><%= @cocktail.story %></p>
 <br>
 <p> <% @cocktail.cocktail_ingredients.each do |cocktail_ingredient| %>
-        <li><%= cocktail_ingredient.ingredient.name %> <%= cocktail_ingredient.quantity %> <%= cocktail_ingredient.unit %> </li>
+        <li><%= cocktail_ingredient.ingredient.id %><%= cocktail_ingredient.ingredient.name %> <%= cocktail_ingredient.quantity %> <%= cocktail_ingredient.unit %> </li>
     <% end %>
 </p>
 <br>
