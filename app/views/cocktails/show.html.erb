@@ -1,4 +1,11 @@
-<h2><%= @cocktail.name %></h2>
+<h2><%= @cocktail.name %></h2> by <%= @cocktail.user.first_name %> <p> </p>
 <br>
-<p><%= @cocktail.description %></p>
+<p><%= @cocktail.story %></p>
+<br>
+<p> <% @cocktail.cocktail_ingredients.each do |cocktail_ingredient| %>
+        <li><%= cocktail_ingredient.ingredient.name %> <%= cocktail_ingredient.quantity %> <%= cocktail_ingredient.unit %> </li>
+    <% end %>
+</p>
+<br>
+<p><%= @cocktail.instruction %></p>
 <br>

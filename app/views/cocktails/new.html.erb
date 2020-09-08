@@ -1,39 +1,30 @@
-<h1> New Cocktail </h1>
+<fieldset class="new_cocktail", align="center">
+    <legend><h2>New Cocktail:</h2></legend>
 
-<%= form_for @cocktail do |f| %>
-    <%= f.label :name %>
-    <%= f.text_field :name %>
+<%= form_for @cocktail do |cocktail_attributes| %>
+    <%= cocktail_attributes.label "Name:" %>
+    <%= cocktail_attributes.text_field :name %>
     <br><br>
-    <%= f.label :description %>
-    <%= f.text_field :description %>
+    <%= cocktail_attributes.label "Story:" %>
+    <%= cocktail_attributes.text_field :story %>
     <br><br>
-            <%= f.label :ingredients %>
-            <br><br>
-            <%# f.collection_select :ingredient_ids, Ingredient.all, :id, :name, include_blank: true %>
-            <%# f.fields_for :ingredients, @cocktail.ingredients.build do |ingredient| %>
-                
-                
-                
-                <%= f.fields_for :ingredients, @cocktail.ingredients.build do |ingredient| %>
-                <%= ingredient.label :name %>
-                <%= ingredient.text_field :name %>
-
-
-
-                <%= ingredient.fields_for :cocktail_ingredients, @cocktail.cocktail_ingredients.build do |item| %>
-                            
-                            <%= item.label :quantity %>
-                            <%= item.text_field :quantity %>
-                            <%= item.select :unit, options_for_select(CocktailIngredient::UNITS) %>
-                    <% end %>        
-                <br><br>
-            <% end %>
-    <%= f.label :steps %>
+    <%= cocktail_attributes.label "Ingredients:" %>
     <br><br>
-    <%= f.fields_for :steps, @cocktail.steps.build do |step| %>
-        <%= step.label :step %>
-        <%= step.text_field :step %>
-        <br><br>
+    <%= cocktail_attributes.fields_for :cocktail_ingredients, @ingredients do |cocktail_ingredient| %>
+        <div>   <%= cocktail_ingredient.collection_select :ingredient_id, Ingredient.all, :id, :name, include_blank: 'Select Ingredient' %>
+                <%= cocktail_ingredient.fields_for :ingredient, @cocktail.ingredients.build do |ingredient| %>
+                    <%= cocktail_ingredient.label "or create a new ingredient:" %><%= ingredient.text_field :name %>
+                <% end %>
+                <%= cocktail_ingredient.label "Quantity:" %> <%= cocktail_ingredient.text_field :quantity %>
+                <%= cocktail_ingredient.select :unit, options_for_select(CocktailIngredient::UNITS) %>
+        </div>
     <% end %>
-    <%= f.submit "OK" %>
+    <br><br>
+    <%= cocktail_attributes.label "Instructions:" %>
+    <%= cocktail_attributes.text_field :instruction %>
+    <br><br>
+  <%= cocktail_attributes.submit "Submit" %>
+
 <% end %>
+
+</fieldset>

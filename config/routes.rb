@@ -12,8 +12,23 @@ Rails.application.routes.draw do
   # Sign Out
   delete "/signout" => "sessions#destroy"
 
+  
+      # All User's Cocktails 
+      get "/mycocktails" => "cocktails#home"
+
  
   resources :users
+
+  resources :cocktails do
+    # All Cocktails
+    get "/cocktails" => "cocktails#index"
+
+  end
+
+  resources :cocktails, only: [:show] do
+    resources :ingredients
+  end
+
   resources :cocktails
 
 

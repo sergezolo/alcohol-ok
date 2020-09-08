@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
 
-    helper_method :logged_in?, :current_user
+    helper_method :logged_in?, :current_user, :authorized_to_edit?
 
 
     private
@@ -15,6 +15,10 @@ class ApplicationController < ActionController::Base
 
     def redirect_if_not_logged_in
         redirect_to cocktails_path if !logged_in?
+    end
+
+    def authorized_to_edit?(object)
+        current_user.id = object.user_id
     end
 
 end
