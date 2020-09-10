@@ -2,25 +2,39 @@
     <legend><h2>New Cocktail:</h2></legend>
 
 <%= form_for @cocktail do |cocktail_attributes| %>
-    <%= cocktail_attributes.label :name %>
-    <%= cocktail_attributes.text_field :name %>
-    <br><br>
-    <%= cocktail_attributes.label :story %>
-    <%= cocktail_attributes.text_field :story %>
-    <br><br>
-    <%= cocktail_attributes.label "Ingredients:" %>
-    <div>
-    <%= cocktail_attributes.fields_for :ingredient_attributes, @cocktail.ingredients.build do |ingredient_attribute| %>
-        <%= ingredient_attribute.label :name %>
-        <%= ingredient_attribute.text_field :name %>
-        <%= ingredient_attribute.fields_for :cocktail_inredient_attributes, @cocktail.cocktail_ingredients.build do |cocktail_ingredient| %>
-            <%= cocktail_ingredient.label "Quantity:" %> <%= cocktail_ingredient.text_field :quantity %>
-            <%= cocktail_ingredient.select :unit, options_for_select(CocktailIngredient::UNITS) %>
-        <% end %>
-    <% end %>
+    <div class="cocktail_name">
+        <%= cocktail_attributes.label :name %>
+        <%= cocktail_attributes.text_field :name %>
     </div>
-    <%= cocktail_attributes.label "Instructions:" %>
-    <%= cocktail_attributes.text_field :instruction %>
+    <br>
+    <div class="cocktail_description">
+        <%= cocktail_attributes.label :story %>
+        <%= cocktail_attributes.text_field :story %>
+    </div>
+    <br>
+    <div class="cocktails_ingredients">
+        <%= cocktail_attributes.label "Ingredients:" %><br><br>
+            <%= cocktail_attributes.fields_for :cocktail_ingredients do |cocktail_ingredient| %>
+                <div class="ingredient_fields">
+                    <%= cocktail_ingredient.fields_for :ingredient do |ingredient| %>
+                        <%= ingredient.label :name %>
+                        <%= ingredient.text_field :name %>
+                    <% end %>
+                <%= cocktail_ingredient.label :quantity %>
+                <%= cocktail_ingredient.text_field :quantity %>
+                <%= cocktail_ingredient.select :unit, options_for_select(CocktailIngredient::UNITS) %>
+                <%# cocktail_ingredient.hidden_field :_destroy %>
+                <%# link_to_function "remove", "remove_fields(this)" %>
+                </div><br>
+            <% end %>
+        <%# link_to "Add Ingredient", new_ingredient_path%>
+    </div>
+    <br>
+    <div class="cocktail_instructions">
+        <%= cocktail_attributes.label "Instructions:" %>
+        <%= cocktail_attributes.text_field :instruction %>
+    </div>
+    <br>
 
   <%= cocktail_attributes.submit "Submit" %>
 

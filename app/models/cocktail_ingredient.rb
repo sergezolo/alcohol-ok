@@ -5,12 +5,6 @@ class CocktailIngredient < ApplicationRecord
    
     UNITS = ["", "dash", "bar spoon", "teaspoon", "tablespoon", "pony", "jigger", "cup", "oz.", "ml"]
     
-    def ingredient_attributes=(ingredient_attributes)
-        binding.pry
-        self.ingredient = Ingredient.where(:id => ingredient_attributes[:id]).first_or_create do |i|
-            i.name = ingredient_attributes[:name]
-        end
-    end
 
 
 

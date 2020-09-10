@@ -6,14 +6,16 @@ class CocktailsController < ApplicationController
     end
       
     def new
-        @cocktail = Cocktail.new(user_id: params[:user_id])
-        5.times {@cocktail.ingredient_attributes.build}
-        #5.times {@cocktail.cocktail_ingredients.build.build_ingredient}
+        @cocktail = Cocktail.new
+        5.times do
+            @cocktail.cocktail_ingredients.build
+            @cocktail.cocktail_ingredients.last.build_ingredient
+        end
     end
       
     def create
-        binding.pry
-        @cocktail = current_user.cocktails.build(cocktail_params)
+        @cocktail = current_user.cocktails.new(cocktail_params)
+        prepare_cocktail
         if @cocktail.save
             redirect_to cocktail_path(@cocktail)
             flash[:success] = "Cocktail Has Been Cteated Sucessfully!"
@@ -30,13 +32,11 @@ class CocktailsController < ApplicationController
     end
       
     def update
-        if !authorized_to_edit?(@cocktail)
-            redirect to cocktails_path
-            flash[:alert]= "You Don't Have The Access To This Cocktail!"
-        end
-        if @cocktail.update(cocktail_params)
+        @cocktail.attributes = cocktail_params
+        prepare_cocktail
+        if @cocktail.save
             redirect_to cocktail_path(@cocktail)
-            flash[:success] = "Cocktail Has Been Updated Sucessfully!"
+            flash[:success] = "CCocktail Has Been Updated Sucessfully!"
         else
             render 'edit'
         end
@@ -59,13 +59,25 @@ class CocktailsController < ApplicationController
             :name,
             :story,
             :instruction,
-            cocktail_ingredients_attributes: [
-                :ingredient_id,
+            :cocktail_ingredients_attributes => [
+                :id,
                 :quantity,
                 :unit,
-                ingredient_attributes: [:id, :name]
+                #:_destroy,
+                :ingredient_attributes => [
+                    #:id,
+                    :name
+                ]
             ]
         )
+    end
+
+    def prepare_cocktail
+        @cocktail.cocktail_ingredients.each do |cocktail_ingredient|
+            if ingredient = Ingredient.where('LOWER(name) = ?', cocktail_ingredient.ingredient.name.downcase).first
+                cocktail_ingredient.ingredient_id = cocktail_ingredient.ingredient.id = ingredient.id
+            end
+        end
     end
 
 end

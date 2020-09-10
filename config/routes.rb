@@ -23,10 +23,10 @@ Rails.application.routes.draw do
 
   end
 
-  resources :cocktails, only: [:show] do
+  resources :cocktails do
     resources :ingredients
   end
-
+  resources :ingredients
   resources :cocktails
 
 
