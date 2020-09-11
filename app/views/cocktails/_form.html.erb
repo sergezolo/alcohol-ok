@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+    <html>
+        <head>
+            <style>
+                fieldset {
+                background-color: #fae3e3;
+                }
+
+                legend {
+                background-color: #4e0000;
+                color: white;
+                padding: 5px 10px;
+                }
+
+                input {
+                margin: 5px;
+                }
+
+                input[type=submit] {
+                width: 20%;
+                background-color: #4e0000;
+                color: white;
+                padding: 6px 20px;
+                border: none;
+                border-radius: 4px;
+                }
+            </style>
+        </head>
+    <body>
+
+<%= form_for @cocktail do |f| %>
+    <div class="cocktail_name"> <%= f.label :name %> <%= f.text_field :name, :size=>"72" %> </div><br>
+    <div class="cocktail_description"> <%= f.label :story %> <%= f.text_field :story, :size=>"72" %> </div><br>
+    <div class="cocktails_ingredients"><%= f.label "Ingredients:" %><br><br>
+        <%= f.fields_for :cocktail_ingredients do |ff| %>
+            <div class="ingredient_fields">
+                <%= ff.fields_for :ingredient do |fff| %>
+                    <%= fff.label :name %>
+                    <%= fff.text_field :name %>
+                <% end %>
+            <%= ff.label :quantity %> <%= ff.text_field :quantity %>
+            <%= ff.select :unit, options_for_select(CocktailIngredient::UNITS, :selected => ff.object.unit) %> </div><br>
+        <% end %>
+    </div> <br>
+    <div class="cocktail_instructions"> <%= f.label "Instructions:" %> <%= f.text_field :instruction, :size=>"68" %> </div> <br>
+  <%= f.submit "Submit" %>
+<% end %> 
+
+</body></html>
