@@ -1,3 +1,5 @@
 <h1><%= @user.name %></h1>
 
-
+<% @user.coctails.each do |cocktail| %>
+    <%= cocktail.name %>
+<% end %>

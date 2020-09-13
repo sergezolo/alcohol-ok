@@ -1,9 +1,11 @@
 class SessionsController < ApplicationController
 
     def welcome
+        render layout: false
     end
 
-    def bye        
+    def bye
+        render layout: false
     end
 
     def new
@@ -13,7 +15,7 @@ class SessionsController < ApplicationController
         user = User.find_by(email: params[:user][:email])
         if user && user.authenticate(params[:user][:password])
             session[:user_id] = user.id
-            redirect_to user_path(user)
+            redirect_to cocktails_path
         else 
             flash[:message] = "Incorrect email or password, please try again!"
             redirect_to signin_path
