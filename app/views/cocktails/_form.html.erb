@@ -1,6 +1,6 @@
 <%= form_for @cocktail do |f| %>
     <div class="cocktail_name"> <%= f.label :name %> <%= f.text_field :name, :size=>"72" %> </div><br>
-    <div class="cocktail_description"> <%= f.label :story %> <%= f.text_field :story, :size=>"72" %> </div><br>
+    <div class="cocktail_description"> <%= f.label :description %> <%= f.text_field :description, :size=>"68" %> </div><br>
     <div class="cocktails_ingredients"><%= f.label "Ingredients:" %><br><br>
         <%= f.fields_for :cocktail_ingredients do |ff| %>
             <div class="ingredient_fields">
@@ -12,6 +12,6 @@
             <%= ff.select :unit, options_for_select(CocktailIngredient::UNITS, :selected => ff.object.unit) %> </div><br>
         <% end %>
     </div> <br>
-    <div class="cocktail_instructions"> <%= f.label "Instructions:" %> <%= f.text_field :instruction, :size=>"68" %> </div> <br>
+    <div class="cocktail_instructions"> <%= f.label :instructions %> <%= f.text_field :instructions, :size=>"68" %> </div> <br>
   <%= f.submit "Submit" %>
 <% end %> 

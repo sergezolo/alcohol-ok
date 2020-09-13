@@ -21,7 +21,7 @@
           <%= form_tag("/signout", method:"delete") do %>
             <div>
               <div style="float: left;">
-                <div class="name"> Welcome, <%=current_user.first_name%> </div>
+                <div class="name"> Welcome, <%= current_user.name %> </div>
               </div>
               <div style="float: right;">
                 <%= button_tag "Sign Out", class: "button" %> 

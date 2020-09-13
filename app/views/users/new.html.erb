@@ -2,16 +2,11 @@
     <legend><h3>Sign Up</h3></legend>
 
         <%= form_for @user do |f| %>
+            <%= f.text_field :name, placeholder: "Name"  %>
+            <br><br>
             <%= f.email_field :email, placeholder: "Email"  %>
             <br><br>
             <%= f.password_field :password, placeholder: "Password"  %>
-            <br><br>
-            <%= f.text_field :first_name, placeholder: "First Name"  %>
-            <br><br>
-            <%= f.text_field :last_name, placeholder: "Last Name"  %>
-            <br><br>
-            <%= f.label "Date of Birth:" %><br>
-            <%= f.date_field :birth_date, placeholder: "Date of Birth"  %>
             <br><br>
             <%= f.submit "Sign Up" %>
         <% end %>

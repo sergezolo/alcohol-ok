@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 2020_09_01_213446) do
   create_table "cocktail_ingredients", force: :cascade do |t|
     t.integer "cocktail_id"
     t.integer "ingredient_id"
-    t.integer "quantity"
+    t.string "quantity"
     t.string "unit"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -23,8 +23,8 @@ ActiveRecord::Schema.define(version: 2020_09_01_213446) do
 
   create_table "cocktails", force: :cascade do |t|
     t.string "name"
-    t.string "story"
-    t.string "instruction"
+    t.text "description"
+    t.text "instructions"
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -37,9 +37,7 @@ ActiveRecord::Schema.define(version: 2020_09_01_213446) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.date "birth_date"
+    t.string "name"
     t.string "email"
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false

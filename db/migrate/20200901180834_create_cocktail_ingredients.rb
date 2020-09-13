@@ -3,7 +3,7 @@ class CreateCocktailIngredients < ActiveRecord::Migration[6.0]
     create_table :cocktail_ingredients do |t|
       t.integer :cocktail_id
       t.integer :ingredient_id
-      t.integer :quantity
+      t.string :quantity
       t.string :unit
 
       t.timestamps
