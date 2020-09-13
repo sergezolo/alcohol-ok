@@ -5,8 +5,8 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%# javascript_pack_tag 'application', "data-turbolinks-track" => true %>
    
   </head>
 
@@ -31,15 +31,11 @@
         <% else %>
           <div>
             <div style="float: left;">
-              <%= form_tag("/signin", method:"get") do %>
-                <%= button_tag "Sign In", class: "button" %>
-              <% end %>
+              <%= link_to "Sign In", signin_path %>
             </div>
             <div style="float: right;">
-              <%= form_tag("/signup", method:"get") do %>
-                <%= button_tag "Sign Up", class: "button" %>
-              <% end %>
-            </div>
+              <%= link_to "Sign Up", signup_path %>
+             </div>
           </div>
         <% end %>
       </div>

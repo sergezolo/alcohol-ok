@@ -1,5 +1,6 @@
-<% @cocktails.each do |cocktail| %>
-    <ul>
-        <li><%= link_to cocktail.name, cocktail_path(cocktail) %></li>
-    </ul>
+<% @cocktails.each_slice(3) do |cocktail| %>
+    <% cocktail.each do |i|%>
+        <div align="center" class="float-left"><%= link_to i.name, cocktail_path(i) %></div>
+    <%end%>
 <% end %>
+

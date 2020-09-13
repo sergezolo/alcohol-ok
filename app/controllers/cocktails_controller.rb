@@ -44,7 +44,7 @@ class CocktailsController < ApplicationController
       
     def destroy
         @cocktail.destroy
-        redirect_to root_path
+        redirect_to cocktails_path
         flash[:success] = "Cocktail Has Been Deleted Succesfully!"
     end
       

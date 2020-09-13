@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   resources :steps
+  # Sign Out
+  delete "/signout" => "sessions#destroy"
   # First Page
   root "sessions#welcome"
   # Younger than 21
@@ -9,26 +11,20 @@ Rails.application.routes.draw do
   # Sign In
   get "/signin" => "sessions#new"
   post "/signin" => "sessions#create"
-  # Sign Out
-  delete "/signout" => "sessions#destroy"
+
   # All User's Cocktails 
   get "/mycocktails" => "users#show"
-
- 
   resources :users
-
   resources :cocktails do
     # All Cocktails
     get "/cocktails" => "cocktails#index"
-
   end
 
   resources :cocktails do
     resources :ingredients
   end
-  resources :ingredients
-  resources :cocktails
 
 
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+
 end

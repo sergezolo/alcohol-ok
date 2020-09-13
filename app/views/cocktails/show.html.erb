@@ -1,11 +1,29 @@
-<h2><%= @cocktail.name %></h2> <p> by <%= @cocktail.user.first_name %>  </p>
+<%= render 'styling' %>
 <br>
-<p><%= @cocktail.story %></p>
-<br>
-<p> <% @cocktail.cocktail_ingredients.each do |cocktail_ingredient| %>
-        <li><%= cocktail_ingredient.ingredient.name %> <%= cocktail_ingredient.quantity %> <%= cocktail_ingredient.unit %> </li>
-    <% end %>
-</p>
-<br>
-<p><%= @cocktail.instruction %></p>
-<br>
+<fieldset class="cocktail", align="center"><br>
+    <legend>Cocktail:</h2></legend>
+    <div class="cocktail_name"><h2><%= @cocktail.name %></h2><p><%= "by " + @cocktail.user.first_name %></p></div><br>
+    <div class="cocktail_description"><p><%= @cocktail.story %></p></div><br>
+    <div class="cocktails_ingredients"><%= "Ingredients:" %><br><br>
+        <% @cocktail.cocktail_ingredients.each do |cocktail_ingredient| %>
+            <div class="ingredient_fields">
+            <li><%= cocktail_ingredient.ingredient.name %> <%= cocktail_ingredient.quantity %> <%= cocktail_ingredient.unit %> </li>
+            </div><br>
+        <% end %>
+    </div> <br>
+    <div class="cocktail_instructions"> <%= "Instructions:" %> <%= @cocktail.instruction %> </div> <br>
+
+<% if logged_in? && current_user %>
+    <div>
+        <%= form_tag(edit_cocktail_path, method:"get") do %>
+            <%= button_tag "Edit" %>
+        <% end %>
+    </div>
+    <div>
+        <%= form_tag(cocktail_path, method:"delete", confirm: "Are you sure?") do %>
+            <%= button_tag "Delete" %>
+        <% end %>
+    </div>
+<% end %>
+
+</fieldset>

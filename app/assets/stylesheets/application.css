@@ -86,3 +86,12 @@
   float: left;
 }
 
+.float-left {
+  float:left;
+  background-color: #fae3e3;
+  width: 330px;
+  height: 80px;
+  border: 1px solid gray;
+  padding: 20px;
+  margin: 20px;
+}

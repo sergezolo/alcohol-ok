@@ -1,14 +1,20 @@
 {
   "name": "alcohol_ok",
   "private": true,
+  "devDependencies": {
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.10"
+  },
   "dependencies": {
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",
     "@rails/ujs": "^6.0.0",
     "@rails/webpacker": "^5.2.1",
-    "turbolinks": "^5.2.0"
+    "turbolinks": "^5.2.0",
+    "bootstrap": "4.0.0-beta",
+    "coffeescript": "1.12.7",
+    "jquery": "^3.3.1",
+    "popper.js": "^1.14.6"
   },
   "version": "0.1.0"
 }
-
-
