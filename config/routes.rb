@@ -14,5 +14,7 @@ Rails.application.routes.draw do
   # All User's Cocktails 
   get "/mycocktails" => "cocktails#list"
   resources :users
-  resources :cocktails 
+  resources :cocktails do
+    resources :cocktail_ingredients, only: [:new, :destroy]
+  end
 end

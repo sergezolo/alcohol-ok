@@ -1,0 +1,15 @@
+<%= render 'layouts/styling' %>
+<br>
+<fieldset class="cocktail", align="center"><br>
+    <legend>Add Ingredient:</h2></legend>
+
+<%= form_for ([@cocktail.cocktail_ingredients, @cocktail_ingredient]) do |f| %>
+    <%= f.fields_for :ingredient do |ff| %>
+        <%= ff.label :name %>
+        <%= ff.text_field :name %>
+    <% end %>
+    <%= f.label :quantity %> <%= ff.text_field :quantity %>
+    <%= f.select :unit, options_for_select(CocktailIngredient::UNITS, :selected => ff.object.unit) %> </div><br>
+<% end %>
+
+</fieldset>

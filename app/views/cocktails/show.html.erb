@@ -7,7 +7,8 @@
     <div class="cocktails_ingredients"><%= "Ingredients:" %><br><br>
         <% @cocktail.cocktail_ingredients.each do |cocktail_ingredient| %>
             <div class="ingredient_fields">
-            <li><%= cocktail_ingredient.ingredient.name %> <%= cocktail_ingredient.quantity %> <%= cocktail_ingredient.unit %> </li>
+            <li><%= cocktail_ingredient.ingredient.name %> <%= cocktail_ingredient.quantity %> <%= cocktail_ingredient.unit %>
+                <%= form_tag(cocktail_cocktail_ingredient_path(@cocktail), method:"delete") do %> <%= button_tag "x" %> <% end %><% %></li>
             </div><br>
         <% end %>
     </div> <br>

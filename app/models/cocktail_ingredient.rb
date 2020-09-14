@@ -7,5 +7,4 @@ class CocktailIngredient < ApplicationRecord
    
     UNITS = ["", "dash", "bar spoon", "teaspoon", "tablespoon", "pony", "jigger", "cup", "oz.", "ml"]
     
-   
 end
