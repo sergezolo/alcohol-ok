@@ -13,7 +13,7 @@
     </div> <br>
     <div class="cocktail_instructions"> <%= "Instructions:" %> <%= @cocktail.instructions %> </div> <br>
 
-<% if logged_in? && current_user %>
+<% if logged_in? && @cocktail.user == current_user %>
     <div>
         <%= form_tag(edit_cocktail_path, method:"get") do %>
             <%= button_tag "Edit" %>

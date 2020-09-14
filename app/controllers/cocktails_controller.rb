@@ -1,15 +1,34 @@
 class CocktailsController < ApplicationController
-    before_action :find_cocktail, only: [:show, :edit, :update, :destroy]
 
     def index
         @cocktails = Cocktail.all
     end
       
+    def list
+        if logged_in?
+            @my_cocktails = current_user.cocktails
+        else
+            @error = "Please Sign Up to see your cocktails!"
+            redirect_to cocktails_path
+        end
+    end
+
+    def show
+        @cocktail = Cocktail.find_by_id(params[:id])
+        redirect_to cocktails_path if !@cocktail
+    end
+
     def new
-        @cocktail = Cocktail.new
-        5.times do
-            @cocktail.cocktail_ingredients.build
-            @cocktail.cocktail_ingredients.last.build_ingredient
+        if logged_in? 
+            @cocktail = current_user.cocktails.new
+            5.times do
+                @cocktail.cocktail_ingredients.build
+                @cocktail.cocktail_ingredients.last.build_ingredient
+            end
+        else
+            flash[:message] = "You need an account to create a cocktail!"
+            @error = "You need an account to create a cocktail!"
+            redirect_to cocktails_path
         end
     end
       
@@ -17,42 +36,51 @@ class CocktailsController < ApplicationController
         @cocktail = current_user.cocktails.new(cocktail_params)
         prepare_cocktail
         if @cocktail.save
+            flash[:message] = "Cocktail Has Been Cteated Sucessfully!"
             redirect_to cocktail_path(@cocktail)
-            flash[:success] = "Cocktail Has Been Cteated Sucessfully!"
         else
             render 'new'
         end
     end
       
     def edit
-        if !authorized_to_edit?(@cocktail)
+        @cocktail = Cocktail.find_by_id(params[:id])
+        if !@cocktail || @cocktail.user != current_user				
+            flash[:message]= "You can't edit this cocktail!"
             redirect_to cocktails_path
-            flash[:alert]= "You Don't Have The Access To This Cocktail!"
-        end
+        end			
     end
       
     def update
-        @cocktail.attributes = cocktail_params
-        prepare_cocktail
-        if @cocktail.save
-            redirect_to cocktail_path(@cocktail)
-            flash[:success] = "CCocktail Has Been Updated Sucessfully!"
+        @cocktail = Cocktail.find_by_id(params[:id])
+        if !@cocktail || @cocktail.user != current_user				
+            flash[:message]= "You can't edit this cocktail!"
+            redirect_to cocktails_path
         else
-            render 'edit'
+            @cocktail.attributes = cocktail_params
+            prepare_cocktail
+            if @cocktail.save
+                redirect_to cocktail_path(@cocktail)
+                flash[:message] = "Cocktail Has Been Updated Sucessfully!"
+            else
+                render 'edit'
+            end
         end
     end
       
     def destroy
-        @cocktail.destroy
-        redirect_to cocktails_path
-        flash[:success] = "Cocktail Has Been Deleted Succesfully!"
+        @cocktail = Cocktail.find_by_id(params[:id])
+        if !@cocktail || @cocktail.user != current_user				
+            flash[:message]= "You can't delete this cocktail!"
+            redirect_to cocktails_path
+        else
+            @cocktail.destroy
+            flash[:message] = "Cocktail Has Been Deleted Succesfully!"
+            redirect_to cocktails_path
+        end
     end
       
     private
-      
-    def find_cocktail
-        @cocktail = Cocktail.find(params[:id])
-    end
 
     def cocktail_params
         params.require(:cocktail).permit(

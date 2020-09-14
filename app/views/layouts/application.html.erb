@@ -11,9 +11,9 @@
   </head>
 
   <body>
-    <div class="topnav">
-      <%= link_to "alcoholOK", cocktails_path %>
-    </div>
+      <div class="topnav">
+        <%= link_to "alcoholOK", cocktails_path %>
+      </div>
 
     <div class="topnav_sm">
       <div style="float: right;">
@@ -40,16 +40,22 @@
         <% end %>
       </div>
     </div>
-
-      
+  
         <% if logged_in? %>
           <%= link_to "My Cocktails", mycocktails_path%>
           <%= link_to "New Cocktail", new_cocktail_path %>
         <% end %>
+    </div>
 
+<div>
+    <div>
+    <br>
+      <% if flash[:message] %>
+        <%= flash[:message] %>
+      <% end %>
+        <%= @error %>
+    </div>
 </div>
-
-
     <%= yield %>
   </body>
 </html>

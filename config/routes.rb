@@ -11,20 +11,8 @@ Rails.application.routes.draw do
   # Sign In
   get "/signin" => "sessions#new"
   post "/signin" => "sessions#create"
-
   # All User's Cocktails 
-  get "/mycocktails" => "users#show"
+  get "/mycocktails" => "cocktails#list"
   resources :users
-  resources :cocktails do
-    # All Cocktails
-    get "/cocktails" => "cocktails#index"
-  end
-
-  resources :cocktails do
-    resources :ingredients
-  end
-
-
-
-
+  resources :cocktails 
 end
