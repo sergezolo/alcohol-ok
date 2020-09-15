@@ -15,60 +15,60 @@ end
 user1 = User.create(name: "Donald T", email: "donald@whitehouse.gov", password_digest: BCrypt::Password.create('123456'))
 user2 = User.create(name: "Vlad P", email: "vladimir@kremlin.ru", password_digest: BCrypt::Password.create('123456'))
 
-qr_params => {name: "Quill Riff", user_id: user1.id,
-      description: "Keith Meicher, the head bartender at Sepia in Chicago, finds that blanc vermouth has a great affinity for absinthe. This white variation on a Quill, essentially an absinthe-tinged Negroni, sees sweet red vermouth replaced with white, and Campari with Luxardo Bitter Bianco. It’s a great beginner cocktail for the absinthe-curious since it contains just a small amount of the green spirit to coat the glass, adding subtle scent and flavor. 'Some people might be turned off of absinthe because they fear it’s too dominant a flavor,' says Meicher. 'But with a deft hand, you can balance any cocktail.'",
-      instructions: "Rinse a rocks glass with absinthe and discard excess. Add all ingredients into a mixing glass with ice and stir until well-chilled. Strain into the prepared rocks glass over a fresh large ice cube. Garnish with a grapefruit twist.",
-      :cocktail_ingredients_attributes => {
-          "0" => {
-            quantity: "11/2",
-            unit: "oz.",
-            :ingredient_attributes => {
-                name: "gin dry"
-            }
-          },
-          "1" => {
-            quantity: "1",
-            unit: "oz.",
-            :ingredient_attributes => {
-                name: "vermouth Dolin blanc"
-            }
-          },
-          "2" => {
-            quantity: "3/4",
-            unit: "oz.",
-            :ingredient_attributes => {
-                name: "Luxardo Bitter Bianco"
-            }
-          },
-          "3" => {
-            quantity: "",
-            unit: " ",
-            :ingredient_attributes => {
-                name: "Absinthe, to rinse glass"
-            }
-          },
-          "4" => {
-            quantity: "",
-            unit: " ",
-            :ingredient_attributes => {
-                name: "Garnish: grapefruit twist"
-            }
-          }
-      }
-    }
+# qr_params => {name: "Quill Riff", user_id: user1.id,
+#       description: "Keith Meicher, the head bartender at Sepia in Chicago, finds that blanc vermouth has a great affinity for absinthe. This white variation on a Quill, essentially an absinthe-tinged Negroni, sees sweet red vermouth replaced with white, and Campari with Luxardo Bitter Bianco. It’s a great beginner cocktail for the absinthe-curious since it contains just a small amount of the green spirit to coat the glass, adding subtle scent and flavor. 'Some people might be turned off of absinthe because they fear it’s too dominant a flavor,' says Meicher. 'But with a deft hand, you can balance any cocktail.'",
+#       instructions: "Rinse a rocks glass with absinthe and discard excess. Add all ingredients into a mixing glass with ice and stir until well-chilled. Strain into the prepared rocks glass over a fresh large ice cube. Garnish with a grapefruit twist.",
+#       :cocktail_ingredients_attributes => {
+#           "0" => {
+#             quantity: "11/2",
+#             unit: "oz.",
+#             :ingredient_attributes => {
+#                 name: "gin dry"
+#             }
+#           },
+#           "1" => {
+#             quantity: "1",
+#             unit: "oz.",
+#             :ingredient_attributes => {
+#                 name: "vermouth Dolin blanc"
+#             }
+#           },
+#           "2" => {
+#             quantity: "3/4",
+#             unit: "oz.",
+#             :ingredient_attributes => {
+#                 name: "Luxardo Bitter Bianco"
+#             }
+#           },
+#           "3" => {
+#             quantity: "",
+#             unit: " ",
+#             :ingredient_attributes => {
+#                 name: "Absinthe, to rinse glass"
+#             }
+#           },
+#           "4" => {
+#             quantity: "",
+#             unit: " ",
+#             :ingredient_attributes => {
+#                 name: "Garnish: grapefruit twist"
+#             }
+#           }
+#       }
+#     }
 
-    #qr_params = ("name"=>"Quill Riff", "description"=>"Keith Meicher, the head bartender at Sepia in Chicago, finds that blanc vermouth has a great affinity for absinthe. This white variation on a Quill, essentially an absinthe-tinged Negroni, sees sweet red vermouth replaced with white, and Campari with Luxardo Bitter Bianco. It’s a great beginner cocktail for the absinthe-curious since it contains just a small amount of the green spirit to coat the glass, adding subtle scent and flavor. 'Some people might be turned off of absinthe because they fear it’s too dominant a flavor,' says Meicher. 'But with a deft hand, you can balance any cocktail.'", "instructions"=>"Rinse a rocks glass with absinthe and discard excess. Add all ingredients into a mixing glass with ice and stir until well-chilled. Strain into the prepared rocks glass over a fresh large ice cube. Garnish with a grapefruit twist.", "cocktail_ingredients_attributes"=> {"0"=> {"quantity"=>"1/2", "unit"=>"oz.", "ingredient_attributes"=> {"name"=>"gin dry"}}, "1"=> {"quantity"=>"1", "unit"=>"oz.", "ingredient_attributes"=> {"name"=>"vermouth Dolin blanc"}}, "2"=> {"quantity"=>"3/4", "unit"=>"oz.", "ingredient_attributes"=> {"name"=>"vermouth Dolin blanc"}}, "3"=> {"quantity"=>"", "unit"=>"", "ingredient_attributes"=> {"name"=>"Absinthe, to rinse glass"}}, "4"=> {"quantity"=>"", "unit"=>"", "ingredient_attributes"=> {"name"=>"Garnish: grapefruit twist"}}})
-    create(qr, qr_params)
+#     #qr_params = ("name"=>"Quill Riff", "description"=>"Keith Meicher, the head bartender at Sepia in Chicago, finds that blanc vermouth has a great affinity for absinthe. This white variation on a Quill, essentially an absinthe-tinged Negroni, sees sweet red vermouth replaced with white, and Campari with Luxardo Bitter Bianco. It’s a great beginner cocktail for the absinthe-curious since it contains just a small amount of the green spirit to coat the glass, adding subtle scent and flavor. 'Some people might be turned off of absinthe because they fear it’s too dominant a flavor,' says Meicher. 'But with a deft hand, you can balance any cocktail.'", "instructions"=>"Rinse a rocks glass with absinthe and discard excess. Add all ingredients into a mixing glass with ice and stir until well-chilled. Strain into the prepared rocks glass over a fresh large ice cube. Garnish with a grapefruit twist.", "cocktail_ingredients_attributes"=> {"0"=> {"quantity"=>"1/2", "unit"=>"oz.", "ingredient_attributes"=> {"name"=>"gin dry"}}, "1"=> {"quantity"=>"1", "unit"=>"oz.", "ingredient_attributes"=> {"name"=>"vermouth Dolin blanc"}}, "2"=> {"quantity"=>"3/4", "unit"=>"oz.", "ingredient_attributes"=> {"name"=>"vermouth Dolin blanc"}}, "3"=> {"quantity"=>"", "unit"=>"", "ingredient_attributes"=> {"name"=>"Absinthe, to rinse glass"}}, "4"=> {"quantity"=>"", "unit"=>"", "ingredient_attributes"=> {"name"=>"Garnish: grapefruit twist"}}})
+#     create(qr, qr_params)
 
 
-    private
+#     private
 
-    def create(i, i_params)
-        i = Cocktail.new(i_params)
-            i.cocktail_ingredients.each do |cocktail_ingredient|
-                if ingredient = Ingredient.where('LOWER(name) = ?', cocktail_ingredient.ingredient.name.downcase).first
-                    cocktail_ingredient.ingredient_id = cocktail_ingredient.ingredient.id = ingredient.id
-                end
-            end
-        i.save
-    end
+#     def create(i, i_params)
+#         i = Cocktail.new(i_params)
+#             i.cocktail_ingredients.each do |cocktail_ingredient|
+#                 if ingredient = Ingredient.where('LOWER(name) = ?', cocktail_ingredient.ingredient.name.downcase).first
+#                     cocktail_ingredient.ingredient_id = cocktail_ingredient.ingredient.id = ingredient.id
+#                 end
+#             end
+#         i.save
+#     end

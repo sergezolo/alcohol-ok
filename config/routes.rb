@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   post "/signin" => "sessions#create"
   # All User's Cocktails 
   get "/mycocktails" => "cocktails#list"
+  #Facebook SignIn
+  get '/auth/facebook/callback' => 'sessions#oauth_login'
   resources :users
   resources :cocktails do
     resources :cocktail_ingredients, only: [:new, :destroy]

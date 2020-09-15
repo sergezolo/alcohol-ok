@@ -1,7 +1,6 @@
 <fieldset class="fieldset-auto-width", align="center">
     <legend><h3>Sign In</h3></legend>
 
-        <%= flash[:message] if flash[:message] %>
         <br><br>
         <%= form_for :user do |f| %>
             <%= f.email_field :email, placeholder: "Email" %>
@@ -10,5 +9,7 @@
             <br><br>
             <%= f.submit "Sign In" %>
         <% end %>
+        <br>
+        <%= link_to "Sign In via Facebook", '/auth/facebook' %>
 
 </fieldset>
