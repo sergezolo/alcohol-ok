@@ -1,14 +1,28 @@
 class CocktailsController < ApplicationController
 
     def index
-        @cocktails = Cocktail.all
+        if !params[:name].blank?
+            @cocktails = Cocktail.by_name(params[:name])
+        else
+            @cocktails = Cocktail.all
+        end
+    end
+
+    def sorted_abc
+        @cocktails = Cocktail.all.sorted_abc
+        render :index
+    end
+
+    def sorted_zyx
+        @cocktails = Cocktail.all.sorted_zyx
+        render :index
     end
       
     def list
         if logged_in?
             @my_cocktails = current_user.cocktails
         else
-            @error = "Please Sign Up to see your cocktails!"
+            @error = "Please Sign In to see your cocktails!"
             redirect_to cocktails_path
         end
     end

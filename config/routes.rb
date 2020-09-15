@@ -17,6 +17,10 @@ Rails.application.routes.draw do
   get '/auth/facebook/callback' => 'sessions#oauth_login'
   resources :users
   resources :cocktails do
+    collection do
+      get :sorted_abc
+      get :sorted_zyx
+    end
     resources :cocktail_ingredients, only: [:new, :destroy]
   end
 end
