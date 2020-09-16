@@ -118,7 +118,7 @@ class CocktailsController < ApplicationController
     end
 
     def prepare_cocktail
-        binding.pry 
+        #binding.pry 
         @cocktail.cocktail_ingredients.each do |cocktail_ingredient|
             if ingredient = Ingredient.where('LOWER(name) = ?', cocktail_ingredient.ingredient.name.downcase).first
                 cocktail_ingredient.ingredient_id = cocktail_ingredient.ingredient.id = ingredient.id
