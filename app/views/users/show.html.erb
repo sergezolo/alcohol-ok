@@ -1,5 +1,9 @@
-<h1><%= @user.name %></h1>
-
-<% @user.coctails.each do |cocktail| %>
-    <%= cocktail.name %>
-<% end %>
+<%= render 'layouts/styling' %>
+<br>
+<fieldset class="user", align="center"><br>
+    <legend>User Info:</h2></legend>
+        <div> Name: <%= @user.name %> </div><br>
+        <div> Email: <%= @user.email %> </div><br>
+        <div> Cocktails Created: <%= @user.cocktails.size %> </div><br>
+        <div> <%= link_to "Create a New Cocktail", new_cocktail_path %> | <%= link_to "My Cocktails", user_cocktails_path(@user) %> </div>
+ </fieldset>

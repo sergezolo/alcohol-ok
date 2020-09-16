@@ -21,10 +21,10 @@
           <%= form_tag("/signout", method:"delete") do %>
             <div>
               <div style="float: left;">
-                <div class="name"> Welcome, <%= current_user.name %> </div>
+                <div class="name"> <%= link_to current_user.name, user_path(current_user) %> </div>
               </div>
               <div style="float: right;">
-                <%= button_tag "Sign Out", class: "button" %> 
+                <%= button_tag "SignOut", class: "button" %> 
                 <%#link_to "Sign Out", signout_path, method: :delete %>
               </div> 
           <% end %>
@@ -42,7 +42,7 @@
     </div>
   
         <% if logged_in? %>
-          <%= link_to "My Cocktails", mycocktails_path%>
+          <%= link_to "My Cocktails", user_cocktails_path(current_user)%>
           <%= link_to "New Cocktail", new_cocktail_path %>
         <% end %>
     </div>

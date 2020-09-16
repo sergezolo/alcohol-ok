@@ -1,11 +1,18 @@
 class CocktailsController < ApplicationController
 
     def index
-        if !params[:name].blank?
-            @cocktails = Cocktail.by_name(params[:name])
+        if params[:user_id] && @user = User.find_by_id(params[:user_id])
+            @cocktails = @user.cocktails
         else
+            @error = "User doesn't exist" if params[:user_id]
             @cocktails = Cocktail.all
         end
+
+        # if params[:name] && @user
+        #     @cocktails = @user.cocktails.by_name(params[:name])
+        # else
+        #     @cocktails = Cocktail.by_name(params[:name])
+        # end
     end
 
     def sorted_abc
@@ -18,19 +25,6 @@ class CocktailsController < ApplicationController
         render :index
     end
       
-    def list
-        if logged_in?
-            if !params[:name].blank?
-                @my_cocktails = current_user.cocktails.by_name(params[:name])
-            else
-                @my_cocktails = current_user.cocktails
-            end   
-        else
-            @error = "Please Sign In to see your cocktails!"
-            redirect_to cocktails_path
-        end
-    end
-
     def show
         @cocktail = Cocktail.find_by_id(params[:id])
         redirect_to cocktails_path if !@cocktail
