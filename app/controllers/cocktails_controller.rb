@@ -20,7 +20,11 @@ class CocktailsController < ApplicationController
       
     def list
         if logged_in?
-            @my_cocktails = current_user.cocktails
+            if !params[:name].blank?
+                @my_cocktails = current_user.cocktails.by_name(params[:name])
+            else
+                @my_cocktails = current_user.cocktails
+            end   
         else
             @error = "Please Sign In to see your cocktails!"
             redirect_to cocktails_path
@@ -114,6 +118,7 @@ class CocktailsController < ApplicationController
     end
 
     def prepare_cocktail
+        binding.pry 
         @cocktail.cocktail_ingredients.each do |cocktail_ingredient|
             if ingredient = Ingredient.where('LOWER(name) = ?', cocktail_ingredient.ingredient.name.downcase).first
                 cocktail_ingredient.ingredient_id = cocktail_ingredient.ingredient.id = ingredient.id

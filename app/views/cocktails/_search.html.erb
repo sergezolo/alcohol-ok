@@ -1,0 +1,13 @@
+<div>
+    <div style="float: left;">
+        <%= form_tag("/cocktails", method: "get", :class => "form") do %>
+            Search by Cocktail Name: 
+            <%= text_field_tag :name, params[:name] %>
+            <button type=submit_tag >Search</button>
+        <% end %>
+    </div>
+    <div style="float: right;">
+        Order Names by: <%= link_to "ABC", sorted_abc_cocktails_path %> | <%= link_to "ZYX", sorted_zyx_cocktails_path %>
+    </div>
+</div>
+<br><br>

@@ -21,6 +21,8 @@ Rails.application.routes.draw do
       get :sorted_abc
       get :sorted_zyx
     end
-    resources :cocktail_ingredients, only: [:new, :destroy]
+    get "/ingredient" => "cocktail_ingredients#new"
+    post "/ingredient" => "cocktail_ingredients#create"
+    delete "/ingredient" => "cocktail_ingredients#destroy"
   end
 end
