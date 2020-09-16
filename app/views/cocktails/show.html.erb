@@ -1,5 +1,7 @@
 <%= render 'layouts/styling' %>
 <br>
+<%= render partial: 'layouts/errors', locals: {object: @user}  %>
+<br>
 <fieldset class="cocktail", align="center"><br>
     <legend>Cocktail:</h2></legend>
     <div class="cocktail_name"><h2><%= @cocktail.name %></h2><p><%= "by " + @cocktail.user.name %></p></div><br>

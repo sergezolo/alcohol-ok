@@ -1,5 +1,7 @@
 <%= render 'layouts/styling' %>
 <br>
+<%= render partial: 'layouts/errors', locals: {object: @cocktail}  %>
+<br>
 <fieldset class="cocktail", align="center"><br>
     <legend>Edit Cocktail:</h2></legend>
     <%= render 'form' %>

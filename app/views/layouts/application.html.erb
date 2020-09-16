@@ -11,51 +11,9 @@
   </head>
 
   <body>
-      <div class="topnav">
-        <%= link_to "alcoholOK", cocktails_path %>
-      </div>
 
-    <div class="topnav_sm">
-      <div style="float: right;">
-        <% if logged_in? %>
-          <%= form_tag("/signout", method:"delete") do %>
-            <div>
-              <div style="float: left;">
-                <div class="name"> <%= link_to current_user.name, user_path(current_user) %> </div>
-              </div>
-              <div style="float: right;">
-                <%= button_tag "SignOut", class: "button" %> 
-                <%#link_to "Sign Out", signout_path, method: :delete %>
-              </div> 
-          <% end %>
-        <% else %>
-          <div>
-            <div style="float: left;">
-              <%= link_to "Sign In", signin_path %>
-            </div>
-            <div style="float: right;">
-              <%= link_to "Sign Up", signup_path %>
-             </div>
-          </div>
-        <% end %>
-      </div>
-    </div>
-  
-        <% if logged_in? %>
-          <%= link_to "My Cocktails", user_cocktails_path(current_user)%>
-          <%= link_to "New Cocktail", new_cocktail_path %>
-        <% end %>
-    </div>
-
-<div>
-    <div>
-    <br>
-      <% if flash[:message] %>
-        <%= flash[:message] %>
-      <% end %>
-        <%= @error %>
-    </div>
-</div><br>
+ <%= render 'layouts/navbar' %>
+      
     <%= yield %>
   </body>
 </html>

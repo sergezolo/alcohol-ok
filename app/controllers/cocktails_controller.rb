@@ -1,4 +1,5 @@
 class CocktailsController < ApplicationController
+    before_action :find_cocktail, only: [:show, :new, :edit, :update, :destroy]
 
     def index
         if params[:user_id] && @user = User.find_by_id(params[:user_id])
@@ -7,15 +8,10 @@ class CocktailsController < ApplicationController
             @error = "User doesn't exist" if params[:user_id]
             @cocktails = Cocktail.all
         end
-
-        # if params[:name] && @user
-        #     @cocktails = @user.cocktails.by_name(params[:name])
-        # else
-        #     @cocktails = Cocktail.by_name(params[:name])
-        # end
+        @cocktails = @cocktails.search(params[:name]) if params[:name] && !params[:name].empty?
     end
 
-    def sorted_abc
+    def sorted_abc(var)
         @cocktails = Cocktail.all.sorted_abc
         render :index
     end
@@ -26,7 +22,6 @@ class CocktailsController < ApplicationController
     end
       
     def show
-        @cocktail = Cocktail.find_by_id(params[:id])
         redirect_to cocktails_path if !@cocktail
     end
 
@@ -56,7 +51,6 @@ class CocktailsController < ApplicationController
     end
       
     def edit
-        @cocktail = Cocktail.find_by_id(params[:id])
         if !@cocktail || @cocktail.user != current_user				
             flash[:message]= "You can't edit this cocktail!"
             redirect_to cocktails_path
@@ -64,7 +58,6 @@ class CocktailsController < ApplicationController
     end
       
     def update
-        @cocktail = Cocktail.find_by_id(params[:id])
         if !@cocktail || @cocktail.user != current_user				
             flash[:message]= "You can't edit this cocktail!"
             redirect_to cocktails_path
@@ -81,7 +74,6 @@ class CocktailsController < ApplicationController
     end
       
     def destroy
-        @cocktail = Cocktail.find_by_id(params[:id])
         if !@cocktail || @cocktail.user != current_user				
             flash[:message]= "You can't delete this cocktail!"
             redirect_to cocktails_path
@@ -93,6 +85,10 @@ class CocktailsController < ApplicationController
     end
       
     private
+
+    def find_cocktail
+        @cocktail = Cocktail.find_by_id(params[:id])
+    end
 
     def cocktail_params
         params.require(:cocktail).permit(

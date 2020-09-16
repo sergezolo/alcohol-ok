@@ -1,9 +1,0 @@
-<% if @my_cocktails.size == 0 %>
-    <h3> You don't have any Cocktails yet. Please create a new one! </h3> 
-<% else %>
-    <% @my_cocktails.each_slice(3) do |cocktail| %>
-        <% cocktail.each do |i|%>
-            <div align="center" class="float-left"><%= link_to i.name, cocktail_path(i) %></div>
-        <%end%>
-    <% end %>
-<% end %>
