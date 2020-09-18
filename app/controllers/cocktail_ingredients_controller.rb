@@ -12,8 +12,7 @@ class CocktailIngredientsController < ApplicationController
 
     def create
       @cocktail = current_user.cocktails.find_by_id(params[:cocktail_id])
-      @ingredient = Ingredient.find_or_create_by(name: params[:cocktail_ingredient][:ingredient][:name])
-      #binding.pry
+      @ingredient = Ingredient.find_or_create_by(name: params[:cocktail_ingredient][:ingredient_attributes][:name])
       if @ingredient.name != ""
         @cocktail_ingredient = @cocktail.cocktail_ingredients.new(cocktail_ingredients_params)
         @cocktail_ingredient.ingredient_id = @ingredient.id
@@ -31,7 +30,7 @@ class CocktailIngredientsController < ApplicationController
 
     def destroy
         if params[:cocktail_id] && @cocktail = current_user.cocktails.find_by_id(params[:cocktail_id])
-          @cocktail_ingredient = CocktailIngredient.find_by_id(params[:format])
+          @cocktail_ingredient = CocktailIngredient.find_by_id(params[:id])
           if !@cocktail_ingredient 		
               flash[:message]= "You can't delete this ingredient!"
               redirect_to cocktail_path(@cocktail)
@@ -44,18 +43,6 @@ class CocktailIngredientsController < ApplicationController
     end
 
     private
-
-    def cocktail_ingredient_params
-        params.require(:cocktail_ingredient).permit(
-            :cocktail_id,
-            :quantity,
-            :unit,
-            :ingredient => [
-                #:id,
-                :name
-            ]
-        )
-    end
 
     def cocktail_ingredients_params
       params.require(:cocktail_ingredient).permit(:cocktail_id, :quantity, :unit)

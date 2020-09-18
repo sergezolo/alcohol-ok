@@ -1,3 +1,5 @@
+<% unless params[:user_id] %>
+
 <div>
     <div style="float: left;">
         <%= form_tag("/cocktails", method: "get", :class => "form") do %>
@@ -6,8 +8,17 @@
             <button type=submit_tag >Search</button>
         <% end %>
     </div>
+    <div style="float: left;">
+        <%= form_tag("/cocktails", method: "get", :class => "form") do %>
+            | or search by Ingredient Name: 
+            <%= text_field_tag :i, params[:i] %>
+            <button type=submit_tag >Search</button>
+        <% end %>
+    </div>
     <div style="float: right;">
         Order Names by: <%= link_to "ABC", sorted_abc_cocktails_path %> | <%= link_to "ZYX", sorted_zyx_cocktails_path %>
     </div>
 </div>
 <br><br>
+
+<% end %>

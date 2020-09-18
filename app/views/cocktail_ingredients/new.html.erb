@@ -3,7 +3,7 @@
 <fieldset class="cocktail", align="center"><br>
     <legend>Add Ingredient:</h2></legend>
 
-<%= form_for :cocktail_ingredient do |f| %>
+<%= form_for [@cocktail, @cocktail_ingredient] do |f| %>
     <%= f.fields_for :ingredient do |ff| %>
         <%= ff.label :name %>
         <%= ff.text_field :name %>

@@ -9,8 +9,8 @@
     <div class="cocktails_ingredients"><%= "Ingredients:" %><br><br>
         <% @cocktail.cocktail_ingredients.each do |cocktail_ingredient| %>
             <div class="ingredient_fields">
-                <%= form_tag(cocktail_ingredient_path(@cocktail, cocktail_ingredient), method:"delete") do %>
-                    <li><%= cocktail_ingredient.ingredient.name %> <%= cocktail_ingredient.quantity %> <%= cocktail_ingredient.unit %> <%= cocktail_ingredient.id %>
+                <%= form_tag(cocktail_cocktail_ingredient_path(@cocktail, cocktail_ingredient), method:"delete") do %>
+                    <li><%= cocktail_ingredient.ingredient.id %><%= cocktail_ingredient.ingredient.name %> <%= cocktail_ingredient.quantity %> <%= cocktail_ingredient.unit %> <%= cocktail_ingredient.id %>
                         <% if logged_in? && @cocktail.user == current_user %>
                             <button type=submit_tag >x</button>
                         <% end %>
@@ -19,7 +19,7 @@
             </div><br>
         <% end %>
         <% if logged_in? && @cocktail.user == current_user %>
-            <%= link_to "Add a New Ingredient", cocktail_ingredient_path(@cocktail) %>
+            <%= link_to "Add a New Ingredient", new_cocktail_cocktail_ingredient_path(@cocktail) %>
         <% end %>    
     </div> <br>
     <div class="cocktail_instructions"> <%= "Instructions:" %> <%= @cocktail.instructions %> </div> <br>

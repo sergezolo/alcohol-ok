@@ -9,17 +9,10 @@ class CocktailsController < ApplicationController
             @cocktails = Cocktail.all
         end
         @cocktails = @cocktails.search(params[:name]) if params[:name] && !params[:name].empty?
+        @cocktails = @cocktails.by_ingredient(params[:i]) if params[:i] && !params[:i].empty?
     end
 
-    def sorted_abc(var)
-        @cocktails = Cocktail.all.sorted_abc
-        render :index
-    end
 
-    def sorted_zyx
-        @cocktails = Cocktail.all.sorted_zyx
-        render :index
-    end
       
     def show
         redirect_to cocktails_path if !@cocktail
@@ -29,8 +22,7 @@ class CocktailsController < ApplicationController
         if logged_in? 
             @cocktail = current_user.cocktails.new
             5.times do
-                @cocktail.cocktail_ingredients.build
-                @cocktail.cocktail_ingredients.last.build_ingredient
+                @cocktail.cocktail_ingredients.build.build_ingredient
             end
         else
             flash[:message] = "You need an account to create a cocktail!"
@@ -40,6 +32,7 @@ class CocktailsController < ApplicationController
     end
       
     def create
+        binding.pry
         @cocktail = current_user.cocktails.new(cocktail_params)
         prepare_cocktail
         if @cocktail.save
@@ -100,7 +93,6 @@ class CocktailsController < ApplicationController
                 :quantity,
                 :unit,
                 :ingredient_attributes => [
-                    #:id,
                     :name
                 ]
             ]
@@ -108,12 +100,32 @@ class CocktailsController < ApplicationController
     end
 
     def prepare_cocktail
-        #binding.pry 
+
+        # @cocktail.cocktail_ingredients.each do |cocktail_ingredient|
+        #     if ingredient = Ingredient.find_or_create_by(name: cocktail_ingredient.ingredient.name.downcase)
+        #         if ingredient.name != ""
+        #             cocktail_ingredient.ingredient_id = cocktail_ingredient.ingredient.id = ingredient.id
+
+        #         end
+        #     end
+        # end
+
+        
         @cocktail.cocktail_ingredients.each do |cocktail_ingredient|
             if ingredient = Ingredient.where('LOWER(name) = ?', cocktail_ingredient.ingredient.name.downcase).first
-                cocktail_ingredient.ingredient_id = cocktail_ingredient.ingredient.id = ingredient.id
+                cocktail_ingredient.ingredient_id = cocktail_ingredient.ingredient.id = ingredient.id 
             end
         end
+    end
+
+    def sorted_abc
+        @cocktails = Cocktail.all.sorted_abc
+        render :index
+    end
+
+    def sorted_zyx
+        @cocktails = Cocktail.all.sorted_zyx
+        render :index
     end
 
 end

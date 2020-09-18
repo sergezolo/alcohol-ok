@@ -16,7 +16,12 @@ Rails.application.routes.draw do
   resources :users
 
   resources :users do
-    resources :cocktails, only: [:index] 
+    resources :cocktails, only: [:index] do
+      collection do
+        get :sorted_abc
+        get :sorted_zyx
+      end
+    end
   end
 
   resources :cocktails do
@@ -24,8 +29,7 @@ Rails.application.routes.draw do
       get :sorted_abc
       get :sorted_zyx
     end
-    get "/ingredient" => "cocktail_ingredients#new"
-    post "/ingredient" => "cocktail_ingredients#create"
-    delete "/ingredient" => "cocktail_ingredients#destroy"
+    resources :cocktail_ingredients, only: [:index, :new, :create, :destroy]
+    
   end
 end
