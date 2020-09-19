@@ -11,30 +11,40 @@ class CocktailsController < ApplicationController
         @cocktails = @cocktails.search(params[:name]) if params[:name] && !params[:name].empty?
         @cocktails = @cocktails.by_ingredient(params[:i]) if params[:i] && !params[:i].empty?
     end
-
-
       
     def show
         redirect_to cocktails_path if !@cocktail
     end
 
+    def i
+        if logged_in? 
+            if params[:i]
+                @@i = params[:i][:i].to_i
+                redirect_to cocktails_i_new_path
+            else
+                render 'i'
+            end
+        else
+            flash[:message] = "You need an account to create a cocktail!"
+            redirect_to cocktails_path
+        end
+    end
+
     def new
         if logged_in? 
             @cocktail = current_user.cocktails.new
-            5.times do
+            @@i.times do
                 @cocktail.cocktail_ingredients.build.build_ingredient
             end
         else
             flash[:message] = "You need an account to create a cocktail!"
-            @error = "You need an account to create a cocktail!"
             redirect_to cocktails_path
         end
     end
       
     def create
-        binding.pry
         @cocktail = current_user.cocktails.new(cocktail_params)
-        prepare_cocktail
+        #prepare_cocktail
         if @cocktail.save
             flash[:message] = "Cocktail Has Been Cteated Sucessfully!"
             redirect_to cocktail_path(@cocktail)
@@ -56,7 +66,7 @@ class CocktailsController < ApplicationController
             redirect_to cocktails_path
         else
             @cocktail.attributes = cocktail_params
-            prepare_cocktail
+            #prepare_cocktail
             if @cocktail.save
                 redirect_to cocktail_path(@cocktail)
                 flash[:message] = "Cocktail Has Been Updated Sucessfully!"
@@ -99,24 +109,24 @@ class CocktailsController < ApplicationController
         )
     end
 
-    def prepare_cocktail
+    # def prepare_cocktail
 
-        # @cocktail.cocktail_ingredients.each do |cocktail_ingredient|
-        #     if ingredient = Ingredient.find_or_create_by(name: cocktail_ingredient.ingredient.name.downcase)
-        #         if ingredient.name != ""
-        #             cocktail_ingredient.ingredient_id = cocktail_ingredient.ingredient.id = ingredient.id
+    #     # @cocktail.cocktail_ingredients.each do |cocktail_ingredient|
+    #     #     if ingredient = Ingredient.find_or_create_by(name: cocktail_ingredient.ingredient.name.downcase)
+    #     #         if ingredient.name != ""
+    #     #             cocktail_ingredient.ingredient_id = cocktail_ingredient.ingredient.id = ingredient.id
 
-        #         end
-        #     end
-        # end
+    #     #         end
+    #     #     end
+    #     # end
 
         
-        @cocktail.cocktail_ingredients.each do |cocktail_ingredient|
-            if ingredient = Ingredient.where('LOWER(name) = ?', cocktail_ingredient.ingredient.name.downcase).first
-                cocktail_ingredient.ingredient_id = cocktail_ingredient.ingredient.id = ingredient.id 
-            end
-        end
-    end
+    #     @cocktail.cocktail_ingredients.each do |cocktail_ingredient|
+    #         if ingredient = Ingredient.where('LOWER(name) = ?', cocktail_ingredient.ingredient.name.downcase).first
+    #             cocktail_ingredient.ingredient_id = cocktail_ingredient.ingredient.id = ingredient.id 
+    #         end
+    #     end
+    # end
 
     def sorted_abc
         @cocktails = Cocktail.all.sorted_abc

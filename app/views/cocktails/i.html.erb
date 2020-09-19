@@ -1,0 +1,12 @@
+<%= render 'layouts/styling' %>
+<br>
+<fieldset class="cocktail", align="center"><br>
+    <legend>Ingredients:</h2></legend>
+
+    <p>How many ingredients are there in a new Cocktail?</p><br>
+        <%= form_for :i do |f| %>
+            <%= f.text_field :i, :size=>"34" %><br><br>
+        <%= f.submit "Submit" %>
+        <% end %>
+
+</fieldset>
