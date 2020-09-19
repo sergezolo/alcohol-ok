@@ -6,4 +6,3 @@ class User < ApplicationRecord
     has_many :cocktail_ingredients, through: :cocktails
     accepts_nested_attributes_for :cocktails, allow_destroy: true
 end
-

@@ -10,7 +10,7 @@
         <% @cocktail.cocktail_ingredients.each do |cocktail_ingredient| %>
             <div class="ingredient_fields">
                 <%= form_tag(cocktail_cocktail_ingredient_path(@cocktail, cocktail_ingredient), method:"delete") do %>
-                    <li><%= cocktail_ingredient.ingredient.id %><%= cocktail_ingredient.ingredient.name %> <%= cocktail_ingredient.quantity %> <%= cocktail_ingredient.unit %> <%= cocktail_ingredient.id %>
+                    <li><%= cocktail_ingredient.ingredient.name %> <%= cocktail_ingredient.quantity %> <%= cocktail_ingredient.unit %>
                         <% if logged_in? && @cocktail.user == current_user %>
                             <button type=submit_tag >x</button>
                         <% end %>

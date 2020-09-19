@@ -20,7 +20,12 @@ class CocktailsController < ApplicationController
         if logged_in? 
             if params[:i]
                 @@i = params[:i][:i].to_i
-                redirect_to cocktails_i_new_path
+                if @@i == 0
+                    flash[:message] = "Please enter a number greater than 0!"
+                    render 'i'
+                else
+                    redirect_to cocktails_i_new_path
+                end
             else
                 render 'i'
             end
@@ -44,7 +49,7 @@ class CocktailsController < ApplicationController
       
     def create
         @cocktail = current_user.cocktails.new(cocktail_params)
-        #prepare_cocktail
+        prepare_cocktail
         if @cocktail.save
             flash[:message] = "Cocktail Has Been Cteated Sucessfully!"
             redirect_to cocktail_path(@cocktail)
@@ -66,7 +71,7 @@ class CocktailsController < ApplicationController
             redirect_to cocktails_path
         else
             @cocktail.attributes = cocktail_params
-            #prepare_cocktail
+            prepare_cocktail
             if @cocktail.save
                 redirect_to cocktail_path(@cocktail)
                 flash[:message] = "Cocktail Has Been Updated Sucessfully!"
@@ -85,6 +90,16 @@ class CocktailsController < ApplicationController
             flash[:message] = "Cocktail Has Been Deleted Succesfully!"
             redirect_to cocktails_path
         end
+    end
+    
+    def sorted_abc
+        @cocktails = Cocktail.all.sorted_abc
+        render :index
+    end
+
+    def sorted_zyx
+        @cocktails = Cocktail.all.sorted_zyx
+        render :index
     end
       
     private
@@ -109,34 +124,12 @@ class CocktailsController < ApplicationController
         )
     end
 
-    # def prepare_cocktail
-
-    #     # @cocktail.cocktail_ingredients.each do |cocktail_ingredient|
-    #     #     if ingredient = Ingredient.find_or_create_by(name: cocktail_ingredient.ingredient.name.downcase)
-    #     #         if ingredient.name != ""
-    #     #             cocktail_ingredient.ingredient_id = cocktail_ingredient.ingredient.id = ingredient.id
-
-    #     #         end
-    #     #     end
-    #     # end
-
-        
-    #     @cocktail.cocktail_ingredients.each do |cocktail_ingredient|
-    #         if ingredient = Ingredient.where('LOWER(name) = ?', cocktail_ingredient.ingredient.name.downcase).first
-    #             cocktail_ingredient.ingredient_id = cocktail_ingredient.ingredient.id = ingredient.id 
-    #         end
-    #     end
-    # end
-
-    def sorted_abc
-        @cocktails = Cocktail.all.sorted_abc
-        render :index
-    end
-
-    def sorted_zyx
-        @cocktails = Cocktail.all.sorted_zyx
-        render :index
+    def prepare_cocktail
+        @cocktail.cocktail_ingredients.each do |cocktail_ingredient|
+            if ingredient = Ingredient.where('LOWER(name) = ?', cocktail_ingredient.ingredient.name.downcase).first
+                cocktail_ingredient.ingredient_id = cocktail_ingredient.ingredient.id = ingredient.id 
+            end
+        end
     end
 
 end
-      

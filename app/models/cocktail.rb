@@ -15,5 +15,3 @@ class Cocktail < ApplicationRecord
     end
 
 end
-
-    

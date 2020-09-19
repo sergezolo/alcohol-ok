@@ -5,5 +5,5 @@
         <div> Name: <%= @user.name %> </div><br>
         <div> Email: <%= @user.email %> </div><br>
         <div> Cocktails Created: <%= @user.cocktails.size %> </div><br>
-        <div> <%= link_to "Create a New Cocktail", new_cocktail_path %> | <%= link_to "My Cocktails", user_cocktails_path(@user) %> </div>
+        <div> <%= link_to "Create a New Cocktail", cocktails_i_path %> | <%= link_to "My Cocktails", user_cocktails_path(@user) %> </div>
  </fieldset>
