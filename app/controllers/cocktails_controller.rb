@@ -13,6 +13,7 @@ class CocktailsController < ApplicationController
     end
       
     def show
+        delete_empty
         redirect_to cocktails_path if !@cocktail
     end
 
@@ -128,6 +129,16 @@ class CocktailsController < ApplicationController
         @cocktail.cocktail_ingredients.each do |cocktail_ingredient|
             if ingredient = Ingredient.where('LOWER(name) = ?', cocktail_ingredient.ingredient.name.downcase).first
                 cocktail_ingredient.ingredient_id = cocktail_ingredient.ingredient.id = ingredient.id 
+            end
+        end
+    end
+
+    def delete_empty
+        @cocktail = Cocktail.find_by_id(params[:id])
+        @cocktail.ingredients.each do |i|
+            if i.name == ""
+                @item = @cocktail.cocktail_ingredients.find_by(ingredient_id: i)
+                @item.delete
             end
         end
     end
