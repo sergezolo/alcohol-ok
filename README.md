@@ -4,11 +4,11 @@
 
 ## Overview
 
-alcoholOK is a web application created with a Ruby on Rails for Bartenders and Alcohol Enthusiasts!
+alcoholOK is a web application created with Ruby on Rails for Bartenders and Alcohol Enthusiasts!
 
-All user have an access to Cocktail recipes, where they can search them by name or ingredients.
+All users have an access to Cocktail recipes, where they can search them by name or ingredients.
 
-Registered user can create their own Cocktails and share them with the World!
+Registered users can create their own Cocktails and share them with the World!
 
 PS. Remember that responsible drinking of alcohol in small amounts makes you an alcoholOK.
 
